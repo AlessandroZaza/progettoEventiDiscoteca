@@ -1,0 +1,197 @@
+<button
+  class=" btn btn-danger mt-1 ms-1 z-1 position-absolute"
+  [routerLink]="['/home']"
+>
+  Back
+</button>
+
+<img src="{{ event.coverImage }}" class="d-block d-lg-none card-img-top" />
+<h2 class="d-block d-lg-none text-center my-3">{{ event.name }}</h2>
+
+<img
+  src="{{ event.coverImage }}"
+  class="d-none d-lg-block card-img-top"
+  style="max-height: max-content"
+/>
+<h2
+  class="d-none d-lg-block p-3 bg bg-danger danger-subtle bg-opacity-50 border border-4 border-danger-subtle text-center text-dark my-3 position-absolute top-50 start-50 translate-middle z-1"
+>
+  {{ event.name }}
+</h2>
+
+<div
+  class="d-none d-lg-block position-absolute bottom-0 start-50 translate-middle z-1"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="120"
+    height="120"
+    fill="currentColor"
+    class="bi bi-arrow-down text-danger"
+    viewBox="0 0 16 16"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
+    />
+  </svg>
+</div>
+
+<div class="d-block d-lg-none">
+  <ul>
+    <li><strong>Prezzo del biglietto:</strong> {{ event.price }}€</li>
+    <li><strong>Data:</strong> {{event.date}} </li>
+    <li><strong>Dresscode:</strong> {{ event.dresscode }}</li>
+    <li><strong>Drink inclusi:</strong> {{ event.includedDrinks }}</li>
+    <li *ngIf="aperitivo">
+      <strong>Piatti aperitivo:</strong>
+      <ul>
+        <li *ngFor="let dish of dishes">
+          <strong>Nome piatto: </strong> {{ dish.name }}
+          <ul>
+            <li><strong>Descrizione: </strong> {{ dish.description }}</li>
+            <li><strong>Allergeni: </strong> {{ dish.allergens }}</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Generi:</strong> {{ event.tags }}</li>
+  </ul>
+  <hr class="hr mb-2 col-10 m-auto" />
+  <p class="my-1 fw-bold ps-3">Description:</p>
+  <p class="p-3 pt-0">{{ event.description.long }}</p>
+</div>
+
+<div class="d-none d-lg-block d-flex">
+  <div class="row g-0 d-flex justify-content-evenly mt-3 pt-2">
+    <div class="col-4">
+      <ul>
+        <li><strong>Prezzo del biglietto:</strong> {{ event.price }}€</li>
+        <li><strong>Data:</strong> {{event.date}} </li>
+        <li><strong>Dresscode:</strong> {{ event.dresscode }}</li>
+        <li><strong>Drink inclusi:</strong> {{ event.includedDrinks }}</li>
+        <li *ngIf="aperitivo">
+          <strong>Piatti aperitivo:</strong>
+          <ul>
+            <li *ngFor="let dish of dishes">
+              <strong>Nome piatto: </strong> {{ dish.name }}
+              <ul>
+                <li><strong>Descrizione: </strong> {{ dish.description }}</li>
+                <li><strong>Allergeni: </strong> {{ dish.allergens }}</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>Generi:</strong> {{ event.tags }}</li>
+      </ul>
+    </div>
+
+    <div class="vr vr-blurry" style="height: 50vh"></div>
+
+    <div class="col-5">
+      <p class="my-1 fw-bold">Description:</p>
+      <p class="pt-0">{{ event.description.long }}</p>
+      <div class="d-flex justify-content-start">
+        <button
+          class="btn btn-success me-3 mb-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Prenota
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert -->
+<div
+  *ngIf="bookedCorrectly"
+  class="alert alert-success d-flex justify-content-center m-auto my-3 col-md-10"
+  role="alert"
+>
+  <div class="me-3">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-check-lg"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+      />
+    </svg>
+    Prenotazione effettuata correttamente
+  </div>
+
+  <button class="btn p-0 fw-bold ms-auto" (click)="closeAlert()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-x-lg"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+      />
+    </svg>
+  </button>
+</div>
+
+<div class="d-flex justify-content-end">
+  <button
+    class="btn btn-success me-3 mb-3 d-block d-lg-none"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Prenota
+  </button>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Prenotazione biglietto
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          ti stai prenotando per <strong>{{ event.name }}</strong>:
+        </p>
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Chiudi
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="openAlert()"
+        >
+          Conferma prenotazione
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

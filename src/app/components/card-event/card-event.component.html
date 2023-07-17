@@ -1,0 +1,49 @@
+<div [routerLink]="['/dettaglio', event.id]" class="card my-3 d-block d-lg-none" style="width: 18rem" *ngFor="let event of events">
+  <img src="{{ event.coverImage }}" class="card-img-top" >
+  <div
+    class="d-flex justify-content-center rounded-circle mt-2 me-2 bg bg-danger bg-opacity-75 col-1 position-absolute top-0 end-0 z-1"
+  >
+    <p class="m-0 p-0">{{ event.id }}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ event.name }}</h5>
+    <p class="card-text">{{ event.description.short }}</p>
+    <div class="d-flex justify-content-between">
+      <p class="text-muted border bg-dark bg-opacity-25 rounded-4 m-0 p-2">
+        {{ event.tags }}
+      </p>
+      <p
+        class="btn btn-danger fw-bold align-self-center m-0"
+      >
+        {{ event.price }}€
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="d-flex flex-wrap justify-content-center">
+<div [routerLink]="['/dettaglio', event.id]" class="card col-5 m-3 d-none d-lg-block" *ngFor="let event of events">
+    <div class="row g-0">
+      <div class="col-6">
+        <img src="{{ event.coverImage }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-6">
+        <div class="card-body">
+          <h5 class="card-title">{{ event.name }}</h5>
+          <p class="card-text">{{ event.description.short }}</p>
+          <hr class="hr">
+
+          <div class="d-flex mt-auto justify-content-between align-items-center">
+          <p class="card-text m-0"><small class="text-body-secondary">{{ event.tags }}</small></p>
+          <button
+          class="btn btn-danger fw-bold align-self-center m-0"
+        >
+          {{ event.price }}€
+        </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
